@@ -150,6 +150,13 @@
     display: flex; gap: 8px; flex-wrap: wrap;
     margin-top: 10px; margin-bottom: 4px;
   }
+  .map-group-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .06em;
+    color: var(--gold);
+    margin-top: 6px;
+  }
   .map-btn {
     font-family: 'Noto Sans TC', sans-serif;
     font-size: 12px;
@@ -165,6 +172,21 @@
   .map-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(200,151,42,.06); font-weight: 500; }
 
   /* ── SITE CARDS ── */
+  .group-heading {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    border-left: 4px solid var(--gold);
+    padding-left: 12px;
+    margin-top: 8px;
+  }
+  .group-desc {
+    font-size: 13px;
+    color: var(--slate);
+    margin: 8px 0 18px;
+    padding-left: 16px;
+  }
   .cards { display: flex; flex-direction: column; gap: 24px; margin-top: 8px; }
 
   .card {
@@ -270,12 +292,55 @@
   .data-table tbody tr:last-child td { border-bottom: none; }
   .data-table tbody tr:hover td { background: rgba(200,151,42,.03); }
   .td-rank { font-family: 'Noto Serif TC', serif; font-weight: 700; font-size: 15px; }
+  .td-group {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #fff;
+    background: var(--slate) !important;
+    letter-spacing: .03em;
+    padding: 8px 12px !important;
+  }
   .td-name { font-weight: 500; color: var(--ink); }
   .td-mono { font-family: 'Space Mono', monospace; font-size: 10.5px; }
   .badge { display: inline-block; padding: 2px 7px; font-size: 10px; border-radius: 2px; }
   .badge-perfect { background: #edf7f0; color: #2a7a4a; }
   .badge-good { background: #f0f4f7; color: #3a5a7a; }
   .badge-ok { background: #f7f4ec; color: #7a6020; }
+
+  /* ── SCENE GRID ── */
+  .scene-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 8px;
+  }
+  .scene-card {
+    border: 1px solid var(--rule);
+    background: #fff;
+    padding: 16px 18px;
+    border-top: 3px solid var(--rule);
+  }
+  .scene-tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .08em;
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-bottom: 8px;
+  }
+  .scene-good { background: #edf7f0; color: #2a7a4a; }
+  .scene-ok   { background: #f7f4ec; color: #7a6020; }
+  .scene-bad  { background: #f9eeee; color: #a23b3b; }
+  .scene-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+  .scene-body { font-size: 13px; color: var(--slate); line-height: 1.75; }
 
   /* ── NOTICE ── */
   .notice-box {
@@ -294,6 +359,30 @@
   .notice-box ul { padding-left: 18px; }
   .notice-box li { font-size: 13px; color: var(--slate); margin-bottom: 6px; }
   .notice-box li strong { color: var(--ink); }
+
+  /* ── SOURCES ── */
+  .src-list { display: flex; flex-direction: column; gap: 2px; }
+  .src-item {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .src-item:last-child { border-bottom: none; }
+  .src-cat {
+    display: block;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .06em;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .src-item a {
+    font-size: 13.5px;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    transition: border-color .15s;
+  }
+  .src-item a:hover { border-color: var(--gold); }
 
   /* ── FOOTER ── */
   footer {
@@ -314,6 +403,7 @@
     .card { grid-template-columns: 56px 1fr; }
     .card-name { font-size: 15px; }
     .hero { padding: 48px 20px 40px; }
+    .scene-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -357,66 +447,99 @@
 
   <!-- 地圖 -->
   <p class="section-title" style="margin-top:36px;">觀測點位置地圖</p>
+  <p style="font-size:12px;color:var(--slate);margin-bottom:10px;">共六個觀測點，分為兩組。點擊按鈕切換聚焦地圖。</p>
+  <div class="map-group-label">A 組 · 西北岸 Serra de Tramuntana</div>
   <div class="map-btns">
-    <button class="map-btn active" onclick="switchMap(this,'overview')">🗺 總覽</button>
-    <button class="map-btn" onclick="switchMap(this,'rank1')">① Torre des Verger</button>
-    <button class="map-btn" onclick="switchMap(this,'rank2')">② Mirador de les Malgrats</button>
-    <button class="map-btn" onclick="switchMap(this,'rank3')">③ Mirador de sa Foradada</button>
+    <button class="map-btn active" onclick="switchMap(this,'a1')">A1 Torre des Verger</button>
+    <button class="map-btn" onclick="switchMap(this,'a2')">A2 Mirador de les Malgrats</button>
+    <button class="map-btn" onclick="switchMap(this,'a3')">A3 Mirador de sa Foradada</button>
   </div>
-  <div class="map-wrap">
+  <div class="map-group-label" style="margin-top:12px;">B 組 · 南岸 / 西南岸（在地媒體引述 FIAAM 視野地圖列為 100% 全食區）</div>
+  <div class="map-btns">
+    <button class="map-btn" onclick="switchMap(this,'b1')">B1 Far de Cap Blanc</button>
+    <button class="map-btn" onclick="switchMap(this,'b2')">B2 Far des Cap Gros</button>
+    <button class="map-btn" onclick="switchMap(this,'b3')">B3 Far des Cap Salines</button>
+  </div>
+  <div class="map-wrap" style="margin-top:14px;">
     <iframe id="gmap" width="100%" height="460" style="border:0;display:block;"
       loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
-      src="https://maps.google.com/maps?q=Torre+des+Verger+Banyalbufar+Mallorca&z=10&output=embed">
+      src="https://maps.google.com/maps?q=Torre+des+Verger+Banyalbufar+Mallorca&z=15&output=embed">
     </iframe>
   </div>
   <p style="font-size:11px;color:#999;margin-top:8px;">提示：點擊上方按鈕可切換聚焦各觀測點。點地圖內「在較大的地圖中查看」可開啟完整 Google Maps。</p>
 
   <!-- 綜合比較表 -->
-  <p class="section-title">三大觀測地點綜合比較</p>
+  <p class="section-title">六大觀測地點綜合比較</p>
   <table class="data-table">
     <thead>
       <tr>
-        <th>排名</th>
+        <th>編號</th>
         <th>地點名稱</th>
         <th>GPS 座標</th>
         <th>西向視野</th>
-        <th>交通便利性</th>
+        <th>停車 / 步行</th>
       </tr>
     </thead>
     <tbody>
+      <tr><td colspan="5" class="td-group">A 組 · 西北岸 Serra de Tramuntana（高海拔斷崖，視覺戲劇性強）</td></tr>
       <tr>
-        <td class="td-rank" style="color:var(--rank-1)">1</td>
+        <td class="td-rank" style="color:var(--rank-1)">A1</td>
         <td class="td-name">Torre des Verger 維爾格塔觀景台</td>
-        <td class="td-mono">39.6841, 2.4921</td>
+        <td class="td-mono">39.6839, 2.5000</td>
         <td><span class="badge badge-perfect">完美無遮蔽</span></td>
-        <td><span class="badge badge-perfect">距 Ma-10 步行 2 分鐘</span></td>
+        <td><span class="badge badge-perfect">Ma-10 旁，步行 2 分</span></td>
       </tr>
       <tr>
-        <td class="td-rank" style="color:var(--rank-2)">2</td>
+        <td class="td-rank" style="color:var(--rank-2)">A2</td>
         <td class="td-name">Mirador de les Malgrats 馬爾格拉茨群島觀景台</td>
-        <td class="td-mono">39.5008, 2.4419</td>
+        <td class="td-mono">39.4995, 2.4599</td>
         <td><span class="badge badge-good">極佳，直視西側海面</span></td>
-        <td><span class="badge badge-perfect">路邊停車最方便</span></td>
+        <td><span class="badge badge-perfect">路邊停車，步行 2–5 分</span></td>
       </tr>
       <tr>
-        <td class="td-rank" style="color:var(--rank-3)">3</td>
+        <td class="td-rank" style="color:var(--rank-3)">A3</td>
         <td class="td-name">Mirador de sa Foradada 薩福拉達天然岩洞觀景台</td>
-        <td class="td-mono">39.7523, 2.6285</td>
+        <td class="td-mono">39.7520, 2.6291</td>
         <td><span class="badge badge-ok">良好（右側山體需注意）</span></td>
-        <td><span class="badge badge-good">專屬停車場，步行 3 分鐘</span></td>
+        <td><span class="badge badge-good">專屬停車場，步行 3 分</span></td>
+      </tr>
+      <tr><td colspan="5" class="td-group">B 組 · 南岸 / 西南岸（在地媒體引述 FIAAM 視野地圖列為 100% 全食區，地平線開闊、人潮較分散）</td></tr>
+      <tr>
+        <td class="td-rank" style="color:var(--rank-1)">B1</td>
+        <td class="td-name">Far de Cap Blanc 卡布蘭克燈塔崖頂</td>
+        <td class="td-mono">39.3636, 2.7878</td>
+        <td><span class="badge badge-good">戲劇性懸崖，海平線開闊</span></td>
+        <td><span class="badge badge-perfect">崖頂路旁下車即達</span></td>
+      </tr>
+      <tr>
+        <td class="td-rank" style="color:var(--rank-2)">B2</td>
+        <td class="td-name">Far des Cap Gros 古羅斯角燈塔</td>
+        <td class="td-mono">39.7970, 2.6816</td>
+        <td><span class="badge badge-good">俯瞰 Sóller 灣與開闊海面</span></td>
+        <td><span class="badge badge-ok">車位極少，建議步行上來</span></td>
+      </tr>
+      <tr>
+        <td class="td-rank" style="color:var(--rank-3)">B3</td>
+        <td class="td-name">Far des Cap Salines 薩利納斯角燈塔</td>
+        <td class="td-mono">39.2650, 3.0531</td>
+        <td><span class="badge badge-perfect">島嶼最南端，三面環海</span></td>
+        <td><span class="badge badge-good">路邊停車，燈塔區即達</span></td>
       </tr>
     </tbody>
   </table>
 
   <!-- 詳細評述 -->
   <p class="section-title">各觀測地點詳細評述</p>
+
+  <div class="group-heading">A 組 · 西北岸 Serra de Tramuntana</div>
+  <p class="group-desc">高海拔斷崖地形，以高度克服超低仰角，視覺戲劇性最強。缺點是山區窄路（Ma-10）當日可能交通管制、易壅塞。</p>
   <div class="cards">
 
-    <!-- #1 -->
+    <!-- A1 -->
     <div class="card rank-1">
       <div class="card-rank">
-        <span class="rank-label">RANK</span>
-        <span class="rank-num">1</span>
+        <span class="rank-label">SITE</span>
+        <span class="rank-num">A1</span>
       </div>
       <div class="card-body">
         <div class="card-name">Torre des Verger 維爾格塔觀景台</div>
@@ -427,7 +550,7 @@
           <span class="tag">海拔：200m+ 斷崖</span>
           <span class="tag">方位角：287°（西偏西北）</span>
         </div>
-        <div class="card-gps">GPS：39.6841, 2.4921　／　Ma-10 公路旁</div>
+        <div class="card-gps">GPS：39.6839, 2.5000　／　Ma-10 公路旁</div>
         <div class="card-desc">
           本地點位於馬略卡島西北岸 Tramuntana 山脈斷崖之上，海拔逾 200 公尺，前方為一望無際的地中海公海。全食帶中心線橫越此區，且斷崖地形可有效克服食甚時太陽僅約 2.6° 的超低仰角問題，確保全食期間的黑太陽完整懸於海平面之上，視野條件堪稱全島最優。
           <br><br>
@@ -437,11 +560,11 @@
       </div>
     </div>
 
-    <!-- #2 -->
+    <!-- A2 -->
     <div class="card rank-2">
       <div class="card-rank">
-        <span class="rank-label">RANK</span>
-        <span class="rank-num">2</span>
+        <span class="rank-label">SITE</span>
+        <span class="rank-num">A2</span>
       </div>
       <div class="card-body">
         <div class="card-name">Mirador de les Malgrats 馬爾格拉茨群島觀景台</div>
@@ -452,7 +575,7 @@
           <span class="tag">位置：島嶼西南角</span>
           <span class="tag">方位角：287°（西偏西北）</span>
         </div>
-        <div class="card-gps">GPS：39.5008, 2.4419　／　Santa Ponça 社區旁</div>
+        <div class="card-gps">GPS：39.4995, 2.4599　／　Santa Ponça 社區旁</div>
         <div class="card-desc">
           本觀景台位於馬略卡島西南端，可避開前方馬爾格拉茨小島，直視寬廣西側海面。相較於北部 Tramuntana 山區，此處公路路況平整，大幅降低行車難度，亦可減少因山區窄路所造成的塞車風險，為希望避開艱難山路的天文愛好者提供絕佳替代方案。
           <br><br>
@@ -462,11 +585,11 @@
       </div>
     </div>
 
-    <!-- #3 -->
+    <!-- A3 -->
     <div class="card rank-3">
       <div class="card-rank">
-        <span class="rank-label">RANK</span>
-        <span class="rank-num">3</span>
+        <span class="rank-label">SITE</span>
+        <span class="rank-num">A3</span>
       </div>
       <div class="card-body">
         <div class="card-name">Mirador de sa Foradada 薩福拉達天然岩洞觀景台</div>
@@ -477,7 +600,7 @@
           <span class="tag">特色：岩洞巨岩同框</span>
           <span class="tag">方位角：287°（西偏西北）</span>
         </div>
-        <div class="card-gps">GPS：39.7523, 2.6285　／　Deià 村落旁，附設停車場</div>
+        <div class="card-gps">GPS：39.7520, 2.6291　／　Deià 村落旁，附設停車場</div>
         <div class="card-desc">
           薩福拉達觀景台以其獨特的天然穿孔巨岩地景著稱，是三個地點中視覺震撼力最強者。全食發生時，黑太陽與日冕將與極具戲劇性的岩洞奇景形成稀有同框構圖，攝影潛力卓越。觀景台附近設有專屬停車場及 Chill-out 酒吧，下車步行約 3 分鐘即可抵達主平台。
           <br><br>
@@ -487,6 +610,125 @@
       </div>
     </div>
 
+  </div>
+
+  <div class="group-heading" style="margin-top:36px;">B 組 · 南岸 / 西南岸（在地媒體引述 FIAAM 視野地圖列為 100% 全食區）</div>
+  <p class="group-desc">據西班牙在地媒體（Última Hora、Mallorca Diario）報導，FIAAM（馬略卡天文基金會）製作的視野地圖將此帶標示為全食 100% 可見區。地平線開闊、向海無內陸山體遮擋，人潮相對分散，適合避開北部山區交通管制。<span style="color:#999;">（FIAAM 資料係透過媒體與記者會發布，官網並無對應專頁。）</span></p>
+  <div class="cards">
+
+    <!-- B1 -->
+    <div class="card rank-1">
+      <div class="card-rank">
+        <span class="rank-label">SITE</span>
+        <span class="rank-num">B1</span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Far de Cap Blanc 卡布蘭克燈塔崖頂</div>
+        <div class="card-name-en">Far de Cap Blanc（Llucmajor）</div>
+        <div class="card-tags">
+          <span class="tag highlight">媒體引述 100% 全食區</span>
+          <span class="tag">視野：戲劇性懸崖海平線</span>
+          <span class="tag">位置：南岸</span>
+          <span class="tag">方位角：287°（西偏西北）</span>
+        </div>
+        <div class="card-gps">GPS：39.3636, 2.7878　／　主公路旁崖頂</div>
+        <div class="card-desc">
+          據在地媒體報導，FIAAM 製作的視野地圖將 Cap de Regana 至 Cap Blanc 一帶標示為全食條件最佳的海岸帶之一。南岸地形向海開闊，無內陸山體遮擋低空太陽，崖頂氣勢磅礡，是公認的絕佳日落觀景點。觀測不需走到燈塔本體（步道達燈塔需約 45 分鐘），<strong>崖頂路旁下車即有開闊海景視野</strong>，符合便捷需求。
+          <br><br>
+          相較北部山區，南岸行車路況輕鬆、交通管制風險較低。
+        </div>
+        <div class="card-alert">⚠ 治安提醒：多筆遊客回報此處曾發生<strong>車內竊案</strong>，停車時務必淨空車內、勿留貴重物品。</div>
+      </div>
+    </div>
+
+    <!-- B2 -->
+    <div class="card rank-2">
+      <div class="card-rank">
+        <span class="rank-label">SITE</span>
+        <span class="rank-num">B2</span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Far des Cap Gros 古羅斯角燈塔</div>
+        <div class="card-name-en">Far des Cap Gros（Port de Sóller）</div>
+        <div class="card-tags">
+          <span class="tag highlight">媒體引述推薦海岸點</span>
+          <span class="tag">視野：俯瞰 Sóller 灣</span>
+          <span class="tag">方位：正西開闊</span>
+          <span class="tag">方位角：287°（西偏西北）</span>
+        </div>
+        <div class="card-gps">GPS：39.7970, 2.6816　／　Port de Sóller 步道上方</div>
+        <div class="card-desc">
+          據在地媒體報導，此處位於 FIAAM 視野地圖標示的 Tramuntana 海岸帶；西班牙在地指南亦將 Port de Sóller 列為西北岸最佳觀測區之一。燈塔俯瞰整個 Sóller 灣與開闊海面，方位正西，Google 評價達 4.6 星、逾 2,300 則，視野公認絕佳。
+          <br><br>
+          可從 Port de Sóller 鎮沿步道/車道步行上來，全程鋪面好走。
+        </div>
+        <div class="card-alert">⚠ 注意：<strong>停車位極少</strong>，自駕者務必大幅提早抵達，或考慮從鎮上步行上來（夏季炎熱，請備水）。</div>
+      </div>
+    </div>
+
+    <!-- B3 -->
+    <div class="card rank-3">
+      <div class="card-rank">
+        <span class="rank-label">SITE</span>
+        <span class="rank-num">B3</span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Far des Cap Salines 薩利納斯角燈塔</div>
+        <div class="card-name-en">Far des Cap Salines（Santanyí，島嶼最南端）</div>
+        <div class="card-tags">
+          <span class="tag highlight">媒體引述 100% 全食區</span>
+          <span class="tag">視野：三面環海、地平線極開闊</span>
+          <span class="tag">人潮：相對分散</span>
+          <span class="tag">方位角：287°（西偏西北）</span>
+        </div>
+        <div class="card-gps">GPS：39.2650, 3.0531　／　島嶼最南端燈塔區</div>
+        <div class="card-desc">
+          據在地媒體報導，FIAAM 製作的視野地圖將 Colònia de Sant Jordi 至 Cap Salines 一帶標示為全食最佳可見區。此處為島嶼最南端、三面環海，地平線極度開闊，無人工建物遮擋，是少數能看到完整無遮蔽地平線的點。Google 評價 4.5 星、逾 2,500 則。相較北部山區，人潮較為分散。
+          <br><br>
+          路邊停車（假日較滿但通常找得到），燈塔觀景區下車即達。
+        </div>
+        <div class="card-alert">⚠ 注意：據在地媒體報導，Cap Salines 聯外道路被列為當日可能壅塞路段之一，仍須提早抵達。現場無遮蔭，請備帽子與防曬。</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 非最佳點預期景象 -->
+  <p class="section-title">若未在景觀良好的觀測點，島上會看到什麼？</p>
+  <div class="intro-block" style="padding-top:0;">
+    <p>由於這次日食的太陽仰角極低（食甚僅約 2.6°），「站在哪裡」幾乎決定了「看到什麼」。以下依不同情境說明預期景象，協助你評估退而求其次的選擇：</p>
+  </div>
+  <div class="scene-grid">
+    <div class="scene-card">
+      <div class="scene-tag scene-good">情境一</div>
+      <div class="scene-title">在全食帶內、但西方略有遮蔽（如多數海灘、低地）</div>
+      <div class="scene-body">天色會在 20:31 前後急遽轉暗、氣溫驟降，能感受到全食的「白晝變黃昏」氛圍與環境劇變。但若前方有建築、樹木或矮丘，<strong>可能恰好擋住貼海平面的黑太陽本體</strong>，看不到最關鍵的「日冕光環」與「鑽石環」。也就是說，氛圍有了，但最精華的畫面可能落空。</div>
+    </div>
+    <div class="scene-card">
+      <div class="scene-tag scene-ok">情境二</div>
+      <div class="scene-title">在 Palma 市區 / 帕爾馬灣</div>
+      <div class="scene-body">據在地媒體報導，FIAAM 判定 Palma 市區並非 100% 觀測點，<strong>市區約可見 85% 的食分</strong>。西北方的 Bellver 山丘會擋住低空太陽，多數市區地點看不到完整全食。可感受到天色明顯變暗，但天空不會全黑、看不到日冕。市區較開闊的海濱步道（Paseo Marítimo）西段條件稍好。</div>
+    </div>
+    <div class="scene-card">
+      <div class="scene-tag scene-bad">情境三</div>
+      <div class="scene-title">在內陸高地（如 Puig de Randa 等內陸山丘）</div>
+      <div class="scene-body">這類點雖視野遼闊、吸引大量人潮，但因太陽極低，<strong>太陽會先沉入西方的陸地山稜線，在全食真正發生前就「消失」</strong>。換言之，可能看到偏食逐漸加深、環境轉暗，卻在最後一刻失去太陽蹤影，無法見到全食。據在地媒體報導，FIAAM 特別點名此類內陸高地為「視野不保證、但易聚集人潮」的地雷區。</div>
+    </div>
+    <div class="scene-card">
+      <div class="scene-tag scene-bad">情境四</div>
+      <div class="scene-title">在 Sant Elm（西端，面向 Dragonera 島）</div>
+      <div class="scene-body">據在地媒體報導，FIAAM 明確指出，Sant Elm 正前方的 <strong>Sa Dragonera 島（龍島）會在關鍵時刻遮住太陽</strong>，無法看到完整全食。看起來面海開闊，實際上是隱藏地雷，務必避開。</div>
+    </div>
+    <div class="scene-card">
+      <div class="scene-tag scene-bad">情境五</div>
+      <div class="scene-title">完全在全食帶之外（如巴塞隆納等本島東北）</div>
+      <div class="scene-body">會看到接近滿食的<strong>偏食（99%）</strong>，但這與全食有本質差異——天空不會真正變黑、看不到日冕、感受不到突如其來的黑暗與氣溫驟降。天文圈的共識是：偏食 99% 與全食是兩種完全不同的體驗，「差一點」等於「沒看到」。</div>
+    </div>
+    <div class="scene-card">
+      <div class="scene-tag scene-good">加碼彩蛋</div>
+      <div class="scene-title">全食當晚的英仙座流星雨</div>
+      <div class="scene-body">8月12日恰逢英仙座流星雨（Perseidas）極大期前後。若你所在地光害低，日食結束、入夜後還有機會看到流星，是這趟觀測的額外驚喜。</div>
+    </div>
   </div>
 
   <!-- 重要注意事項 -->
@@ -501,13 +743,48 @@
     </ul>
   </div>
 
+  <!-- 資料來源與延伸連結 -->
+  <p class="section-title">資料來源與延伸連結</p>
+  <p style="font-size:13px;color:var(--slate);margin-bottom:14px;">FIAAM（馬略卡天文基金會）的視野地圖與觀測建議，係透過記者會與新聞稿對外發布，其官網（<a href="https://www.fiaamallorca.com" target="_blank" rel="noopener" style="color:var(--gold);">fiaamallorca.com</a>）並無 2026 日食專頁。以下為實際刊載相關資料的在地媒體報導，以及可逐點查詢的第三方互動工具：</p>
+  <div class="src-list">
+    <div class="src-item">
+      <span class="src-cat">在地媒體 · FIAAM 視野地圖</span>
+      <a href="https://www.ultimahora.es/noticias/local/2025/08/19/2452383/fundacio-astronomia-mallorca-elabora-mapa-visibilidad-del-eclipse.html" target="_blank" rel="noopener">Última Hora：FIAAM 製作全島日食視野地圖</a>
+    </div>
+    <div class="src-item">
+      <span class="src-cat">在地媒體 · 19 個關鍵點與交通</span>
+      <a href="https://www.ultimahora.es/noticias/local/2026/01/17/2550907/elaborado-mapa-puntos-criticos-mallorca-para-observar-eclipse-solar-total-del-agosto.html" target="_blank" rel="noopener">Última Hora：馬略卡 19 個觀測關鍵點與壅塞路段</a>
+    </div>
+    <div class="src-item">
+      <span class="src-cat">在地媒體 · 方位角 287° 判定法</span>
+      <a href="https://www.ultimahora.es/noticias/local/2026/04/17/2611671/visibilidad-del-eclipse.html" target="_blank" rel="noopener">Última Hora：用羅盤對準 287° 自行判定能否看到全食</a>
+    </div>
+    <div class="src-item">
+      <span class="src-cat">在地媒體 · 最佳地點總覽</span>
+      <a href="https://www.mallorcadiario.com/el-mapa-definitivo-para-ver-el-eclipse-en-baleares-los-mejores-rincones-de-las-islas-para-verlo-en-directo" target="_blank" rel="noopener">Mallorca Diario：巴利阿里群島最佳觀測地點地圖</a>
+    </div>
+    <div class="src-item">
+      <span class="src-cat">在地媒體 · 英文版</span>
+      <a href="https://www.majorcadailybulletin.com/news/did-you-know/2026/01/19/139649/mallorca-maps-key-spots-for-total-solar-eclipse-crowds-and-traffic.html" target="_blank" rel="noopener">Majorca Daily Bulletin：19 key spots, crowds &amp; traffic</a>
+    </div>
+    <div class="src-item">
+      <span class="src-cat">互動工具 · 逐點視線模擬</span>
+      <a href="http://xjubier.free.fr/en/site_pages/solar_eclipses/TSE_2026_GoogleMapFull.html" target="_blank" rel="noopener">Xavier Jubier 互動 Google 地圖（含逐點時刻與地平線視線）</a>
+    </div>
+    <div class="src-item">
+      <span class="src-cat">機構官網 · 活動報名</span>
+      <a href="https://www.fiaamallorca.com" target="_blank" rel="noopener">FIAAM 官方網站（Reservas 頁有 3Eclipsis 工作坊）</a>
+    </div>
+  </div>
+
   <div style="height:56px;"></div>
 </div>
 
 <!-- FOOTER -->
 <footer>
-  本報告依據 Sky &amp; Telescope、Eclipsophile、National Eclipse、FIAAM（馬略卡天文基金會）等公開天文資料整理彙編<br>
-  天文數據截至 2026年6月，實際觀測條件請以當日氣象及現場情況為準<br>
+  本報告依據 Sky &amp; Telescope、Eclipsophile、National Eclipse 等天文來源，<br>
+  以及西班牙在地媒體（Última Hora、Mallorca Diario、Majorca Daily Bulletin）對 FIAAM 資料的報導整理彙編<br>
+  天文數據截至 2026年6月，實際觀測條件請以當日氣象、現場勘查及第三方互動地圖（Xavier Jubier 等）為準<br>
   <br>
   <span style="letter-spacing:.12em;">MALLORCA ECLIPSE 2026 · AUGUST 12 · 20:31 CEST</span>
 </footer>
@@ -515,10 +792,12 @@
 <script>
   // Google Maps iframe 地點切換（使用 q= 無金鑰格式）
   const MAPS = {
-    overview: 'https://maps.google.com/maps?q=39.61,2.52&z=10&output=embed',
-    rank1:    'https://maps.google.com/maps?q=Torre+des+Verger+Banyalbufar+Mallorca&z=15&output=embed',
-    rank2:    'https://maps.google.com/maps?q=Mirador+de+les+Malgrats+Santa+Ponca+Mallorca&z=15&output=embed',
-    rank3:    'https://maps.google.com/maps?q=Mirador+de+sa+Foradada+Deia+Mallorca&z=15&output=embed'
+    a1: 'https://maps.google.com/maps?q=Torre+des+Verger+Banyalbufar+Mallorca&z=15&output=embed',
+    a2: 'https://maps.google.com/maps?q=Mirador+de+les+Malgrats+Santa+Ponca+Mallorca&z=15&output=embed',
+    a3: 'https://maps.google.com/maps?q=Mirador+de+sa+Foradada+Deia+Mallorca&z=15&output=embed',
+    b1: 'https://maps.google.com/maps?q=Far+de+Cap+Blanc+Llucmajor+Mallorca&z=15&output=embed',
+    b2: 'https://maps.google.com/maps?q=Far+des+Cap+Gros+Port+de+Soller+Mallorca&z=15&output=embed',
+    b3: 'https://maps.google.com/maps?q=Far+des+Cap+Salines+Santanyi+Mallorca&z=15&output=embed'
   };
 
   function switchMap(btn, key) {
