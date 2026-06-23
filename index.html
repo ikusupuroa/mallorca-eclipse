@@ -360,6 +360,61 @@
   .notice-box li { font-size: 13px; color: var(--slate); margin-bottom: 6px; }
   .notice-box li strong { color: var(--ink); }
 
+  /* ── TRAFFIC GRID ── */
+  .traffic-grid { display: flex; flex-direction: column; gap: 14px; margin-top: 8px; }
+  .traffic-card { border: 1px solid var(--rule); background: #fff; border-left: 4px solid var(--rule); }
+  .traffic-high { border-left-color: #c0392b; }
+  .traffic-med  { border-left-color: #e67e22; }
+  .traffic-low  { border-left-color: #27ae60; }
+  .traffic-header { display: flex; align-items: center; gap: 10px; padding: 12px 18px; background: var(--paper); flex-wrap: wrap; }
+  .traffic-badge { font-family: 'Space Mono', monospace; font-size: 10px; padding: 2px 8px; border-radius: 2px; }
+  .badge-high { background: #fdecea; color: #c0392b; }
+  .badge-med  { background: #fef3e6; color: #e67e22; }
+  .badge-low  { background: #eafaf1; color: #27ae60; }
+  .traffic-road { font-size: 13px; font-weight: 600; color: var(--ink); }
+  .traffic-body { padding: 14px 18px; font-size: 13px; color: var(--slate); line-height: 1.75; }
+  .traffic-tip { margin-top: 10px; padding: 8px 12px; background: rgba(200,151,42,.06); border-left: 2px solid var(--gold); font-size: 12.5px; color: #7a6020; }
+  .traffic-note { margin-top: 14px; padding: 12px 16px; background: rgba(14,14,22,.04); border: 1px solid var(--rule); font-size: 12.5px; color: var(--slate); }
+
+  /* ── PHOTO GUIDE ── */
+  .photo-warning { margin: 16px 0; padding: 12px 16px; background: #fdecea; border-left: 4px solid #c0392b; font-size: 13px; color: #7a1010; line-height: 1.7; }
+  .photo-phases { display: flex; flex-direction: column; gap: 14px; margin-top: 8px; }
+  .photo-phase { border: 1px solid var(--rule); background: #fff; }
+  .phase-totality { border-color: var(--gold); box-shadow: 0 2px 12px rgba(200,151,42,.12); }
+  .photo-phase-header { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: var(--paper); flex-wrap: wrap; }
+  .phase-totality .photo-phase-header { background: rgba(200,151,42,.08); }
+  .phase-time { font-family: 'Space Mono', monospace; font-size: 11px; color: #888; }
+  .phase-name { font-size: 13px; font-weight: 600; color: var(--ink); flex: 1; }
+  .phase-filter { font-size: 11px; padding: 2px 8px; border-radius: 2px; }
+  .filter-on  { background: #fdecea; color: #c0392b; }
+  .filter-off { background: #eafaf1; color: #27ae60; }
+  .photo-phase-body { padding: 14px 18px; }
+  .photo-tips { padding-left: 18px; font-size: 13px; color: var(--slate); line-height: 1.8; }
+  .photo-tips li { margin-bottom: 6px; }
+  .tl-action { display: block; margin-top: 4px; font-size: 12px; color: var(--gold); font-weight: 500; }
+  .photo-advice-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 16px; }
+  .photo-advice-card { border: 1px solid var(--rule); background: var(--paper); padding: 14px 16px; }
+  .photo-advice-title { font-size: 13px; font-weight: 700; margin-bottom: 8px; color: var(--ink); }
+  .photo-advice-card p { font-size: 12.5px; color: var(--slate); line-height: 1.7; }
+
+  /* ── TIMELINE ── */
+  .timeline-wrap { margin-top: 8px; position: relative; }
+  .tl-event { display: grid; grid-template-columns: 20px 1fr; gap: 16px; align-items: start; }
+  .tl-event-key { background: rgba(200,151,42,.04); border-left: 3px solid var(--gold); padding-left: 12px; margin-left: -12px; }
+  .tl-dot { width: 16px; height: 16px; border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
+  .tl-dot-partial  { background: #8a9ba8; border: 2px solid #fff; box-shadow: 0 0 0 2px #8a9ba8; }
+  .tl-dot-totality { background: var(--gold); border: 2px solid #fff; box-shadow: 0 0 0 2px var(--gold); }
+  .tl-dot-end      { background: #ccc; border: 2px solid #fff; box-shadow: 0 0 0 2px #ccc; }
+  .tl-connector { width: 2px; height: 24px; background: var(--rule); margin-left: 7px; }
+  .tl-connector-key { background: var(--gold); }
+  .tl-time { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--gold); font-weight: 700; margin-bottom: 2px; }
+  .tl-title { font-family: 'Noto Serif TC', serif; font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+  .tl-desc { font-size: 13px; color: var(--slate); line-height: 1.75; margin-bottom: 16px; }
+
+  @media (max-width: 600px) {
+    .photo-advice-grid { grid-template-columns: 1fr; }
+  }
+
   /* ── SOURCES ── */
   .src-list { display: flex; flex-direction: column; gap: 2px; }
   .src-item {
@@ -383,6 +438,101 @@
     transition: border-color .15s;
   }
   .src-item a:hover { border-color: var(--gold); }
+
+  /* ── FLOATING NAV ── */
+  .fnav {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .fnav-toggle {
+    width: 28px;
+    height: 56px;
+    background: var(--night);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 6px 6px 0;
+    box-shadow: 2px 0 12px rgba(0,0,0,.2);
+    flex-shrink: 0;
+    transition: background .2s;
+    writing-mode: vertical-rl;
+    color: var(--gold-light);
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .1em;
+    padding: 8px 0;
+  }
+  .fnav-toggle:hover { background: var(--slate); }
+  .fnav-panel {
+    display: none;
+    background: var(--night);
+    border-radius: 0 8px 8px 0;
+    box-shadow: 4px 0 20px rgba(0,0,0,.25);
+    padding: 16px 0 12px;
+    min-width: 180px;
+    max-width: 220px;
+  }
+  .fnav-panel.open { display: block; }
+  .fnav-header {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .12em;
+    color: var(--gold);
+    text-transform: uppercase;
+    padding: 0 16px 10px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    margin-bottom: 6px;
+  }
+  .fnav-item {
+    display: block;
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 7px 16px;
+    cursor: pointer;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: rgba(255,255,255,.6);
+    line-height: 1.4;
+    transition: background .15s, color .15s;
+    border-left: 2px solid transparent;
+  }
+  .fnav-item:hover { background: rgba(255,255,255,.05); color: #fff; }
+  .fnav-item.active { color: var(--gold-light); border-left-color: var(--gold); background: rgba(200,151,42,.08); }
+  .fnav-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: rgba(255,255,255,.3);
+    margin-right: 6px;
+  }
+  .fnav-close {
+    display: block;
+    margin: 10px 16px 0;
+    background: none;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 2px;
+    color: rgba(255,255,255,.35);
+    font-size: 10px;
+    padding: 4px 10px;
+    cursor: pointer;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: .06em;
+    width: calc(100% - 32px);
+    text-align: center;
+    transition: background .15s;
+  }
+  .fnav-close:hover { background: rgba(255,255,255,.07); color: rgba(255,255,255,.6); }
+
+  @media (max-width: 600px) { .fnav { display: none; } }
 
   /* ── FOOTER ── */
   footer {
@@ -409,7 +559,24 @@
 </head>
 <body>
 
-<!-- HERO -->
+<!-- FLOATING NAV -->
+<nav class="fnav" id="fnav">
+  <div class="fnav-panel" id="fnavPanel">
+    <div class="fnav-header">目錄 · 快速跳轉</div>
+    <button class="fnav-item" onclick="navTo('sec-astro')"><span class="fnav-num">01</span>天文背景說明</button>
+    <button class="fnav-item" onclick="navTo('sec-timeline')"><span class="fnav-num">02</span>各階段精確時間表</button>
+    <button class="fnav-item" onclick="navTo('sec-scene')"><span class="fnav-num">03</span>非最佳觀測點景象</button>
+    <button class="fnav-item" onclick="navTo('sec-map')"><span class="fnav-num">04</span>觀測點位置地圖</button>
+    <button class="fnav-item" onclick="navTo('sec-table')"><span class="fnav-num">05</span>六大地點綜合比較</button>
+    <button class="fnav-item" onclick="navTo('sec-cards')"><span class="fnav-num">06</span>各觀測地點詳細評述</button>
+    <button class="fnav-item" onclick="navTo('sec-traffic')"><span class="fnav-num">07</span>交通管制風險分析</button>
+    <button class="fnav-item" onclick="navTo('sec-photo')"><span class="fnav-num">08</span>手機拍攝實戰攻略</button>
+    <button class="fnav-item" onclick="navTo('sec-notice')"><span class="fnav-num">09</span>觀測前重要注意事項</button>
+    <button class="fnav-item" onclick="navTo('sec-sources')"><span class="fnav-num">10</span>資料來源與延伸連結</button>
+    <button class="fnav-close" onclick="toggleNav()">收起 ✕</button>
+  </div>
+  <button class="fnav-toggle" id="fnavToggle" onclick="toggleNav()">目錄</button>
+</nav>
 <div class="hero">
   <div class="eclipse-ring"></div>
   <p class="hero-eyebrow">Eclipse Observation Report · Mallorca, Spain</p>
@@ -438,6 +605,7 @@
 
 <div class="container">
 
+  <div id="sec-astro"></div>
   <!-- 天文背景 -->
   <div class="intro-block">
     <p class="section-title">天文背景說明</p>
@@ -445,6 +613,126 @@
     <p>然而此次日食有一關鍵挑戰：食甚發生時太陽仰角僅約 <strong>2.6°</strong>，等同太陽懸浮於海平面上方一個拇指寬度的高度。任何前方地形、建築物或丘陵均足以完全遮蔽全食景象。因此，<strong>選址必須以「西方視野完全無遮蔽」為首要條件</strong>，高度優先於距離市區的便利性。馬略卡島西北岸的 Serra de Tramuntana 山脈懸崖地形，恰好能以海拔高度克服此低仰角限制，提供向西俯瞰公海的絕佳視野。</p>
   </div>
 
+  <div id="sec-timeline"></div>
+  <!-- 精確時間表 -->
+  <p class="section-title">2026年8月12日日全食 — 各階段精確時間表</p>
+  <p style="font-size:13px;color:var(--slate);margin-bottom:16px;">以下時間以 <strong>Palma de Mallorca 為基準（CEST，UTC+2）</strong>，來源：TheSkyLive（Xavier Jubier KML 路徑計算）。各觀測點因地理位置不同，時間差異約在 ±30 秒以內；西北岸（A 組）略早，南岸（B 組）略晚。</p>
+
+  <div class="timeline-wrap">
+    <div class="tl-event">
+      <div class="tl-dot tl-dot-partial"></div>
+      <div class="tl-content">
+        <div class="tl-time">19:38:11 CEST</div>
+        <div class="tl-title">C1 — 第一接觸（偏食開始）</div>
+        <div class="tl-desc">月球外緣首次接觸太陽邊緣。肉眼或許看不出差異，但透過太陽濾鏡可見太陽右上方開始出現微小缺口。此時太陽仰角約 12°。<br><span class="tl-action">📸 動作：架好腳架、裝上太陽濾鏡、開始定時拍攝。</span></div>
+      </div>
+    </div>
+    <div class="tl-connector"></div>
+    <div class="tl-event">
+      <div class="tl-dot tl-dot-partial"></div>
+      <div class="tl-content">
+        <div class="tl-time">約 20:15–20:25</div>
+        <div class="tl-title">深度偏食 — 天色開始異變</div>
+        <div class="tl-desc">太陽被遮蔽超過 80%，天色開始轉為詭異的黃昏色調，氣溫可能下降 2–5°C。動物行為改變、海面顏色轉暗。<br><span class="tl-action">📸 動作：轉廣角拍攝環境氣氛、人群反應、天色變化。</span></div>
+      </div>
+    </div>
+    <div class="tl-connector"></div>
+    <div class="tl-event">
+      <div class="tl-dot tl-dot-totality"></div>
+      <div class="tl-content">
+        <div class="tl-time">約 20:30</div>
+        <div class="tl-title">Shadow Bands（影帶）— 可遇不可求的奇景</div>
+        <div class="tl-desc">全食前約 1–2 分鐘，可能在地面或白色牆面上見到細長的波紋狀明暗條紋快速移動，這是月球本影邊緣的大氣折射現象。<br><span class="tl-action">📸 動作：把白色布料或紙板鋪在地上，對著地面錄影。</span></div>
+      </div>
+    </div>
+    <div class="tl-connector"></div>
+    <div class="tl-event tl-event-key">
+      <div class="tl-dot tl-dot-totality"></div>
+      <div class="tl-content">
+        <div class="tl-time">20:31:05 CEST</div>
+        <div class="tl-title">C2 — 全食開始 ＋ 鑽石環 ＋ Baily's Beads</div>
+        <div class="tl-desc">月球完全遮住太陽光球，最後一縷陽光從月球邊緣山谷間穿出，形成「鑽石環」與「貝里珠」。日冕完整展開，肉眼可見。天空瞬間進入深藍色「假夜」，行星（金星）可能出現。<br><span class="tl-action">📸 動作：移除太陽濾鏡 → 開啟連拍抓鑽石環 → 廣角拍日冕全景 → 同步錄影。</span></div>
+      </div>
+    </div>
+    <div class="tl-connector tl-connector-key"></div>
+    <div class="tl-event tl-event-key">
+      <div class="tl-dot tl-dot-totality"></div>
+      <div class="tl-content">
+        <div class="tl-time">20:31:53 CEST</div>
+        <div class="tl-title">食甚（最大食）</div>
+        <div class="tl-desc">月球中心最接近太陽中心的瞬間，也是日冕最完整展示的時刻。太陽仰角僅約 2°，貼近地中海海平線。全食持續共 1 分 38 秒（C2 → C3）。<br><span class="tl-action">👁 動作：放下手機，用雙眼看。這是一生一次的畫面。</span></div>
+      </div>
+    </div>
+    <div class="tl-connector tl-connector-key"></div>
+    <div class="tl-event tl-event-key">
+      <div class="tl-dot tl-dot-totality"></div>
+      <div class="tl-content">
+        <div class="tl-time">20:32:42 CEST</div>
+        <div class="tl-title">C3 — 全食結束 ＋ 第二道鑽石環</div>
+        <div class="tl-desc">太陽邊緣再次露出，第二道鑽石環出現（通常比 C2 更亮、更快速）。日冕瞬間消失，天色重回偏食的橙黃色調。<br><span class="tl-action">📸 動作：連拍抓第二道鑽石環 → 立即重新加裝太陽濾鏡。</span></div>
+      </div>
+    </div>
+    <div class="tl-connector"></div>
+    <div class="tl-event">
+      <div class="tl-dot tl-dot-partial"></div>
+      <div class="tl-content">
+        <div class="tl-time">20:49 CEST</div>
+        <div class="tl-title">帶食日落 — 本次日食限定奇景</div>
+        <div class="tl-desc">太陽帶著月球遮蔽的缺口沉入地中海海平線，形成本次日食獨有的「帶食日落」。這個景象在全食帶中極為罕見，請把握拍攝機會。<br><span class="tl-action">📸 動作：廣角構圖，把帶缺口的太陽與地中海同框；拍攝完整日落過程。</span></div>
+      </div>
+    </div>
+    <div class="tl-connector"></div>
+    <div class="tl-event">
+      <div class="tl-dot tl-dot-end"></div>
+      <div class="tl-content">
+        <div class="tl-time">約 21:20 CEST</div>
+        <div class="tl-title">C4 — 偏食正式結束（地平線以下，不可見）</div>
+        <div class="tl-desc">理論上偏食在日落後約 21:20 才正式結束（C4），但太陽已沉入地平線以下，無法觀測。整個日食事件正式落幕。</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="sec-scene"></div>
+  <!-- 非最佳點預期景象 -->
+  <p class="section-title">若未在景觀良好的觀測點，島上會看到什麼？</p>
+  <div class="intro-block" style="padding-top:0;">
+    <p>由於這次日食的太陽仰角極低（食甚僅約 2.6°），「站在哪裡」幾乎決定了「看到什麼」。以下依不同情境說明預期景象，協助你評估退而求其次的選擇：</p>
+  </div>
+  <div class="scene-grid">
+    <div class="scene-card">
+      <div class="scene-tag scene-good">情境一</div>
+      <div class="scene-title">在全食帶內、但西方略有遮蔽（如多數海灘、低地）</div>
+      <div class="scene-body">天色會在 20:31 前後急遽轉暗、氣溫驟降，能感受到全食的「白晝變黃昏」氛圍與環境劇變。但若前方有建築、樹木或矮丘，<strong>可能恰好擋住貼海平面的黑太陽本體</strong>，看不到最關鍵的「日冕光環」與「鑽石環」。也就是說，氛圍有了，但最精華的畫面可能落空。</div>
+    </div>
+    <div class="scene-card">
+      <div class="scene-tag scene-ok">情境二</div>
+      <div class="scene-title">在 Palma 市區 / 帕爾馬灣</div>
+      <div class="scene-body">據在地媒體報導，FIAAM 判定 Palma 市區並非 100% 觀測點，<strong>市區約可見 85% 的食分</strong>。西北方的 Bellver 山丘會擋住低空太陽，多數市區地點看不到完整全食。可感受到天色明顯變暗，但天空不會全黑、看不到日冕。市區較開闊的海濱步道（Paseo Marítimo）西段條件稍好。</div>
+    </div>
+    <div class="scene-card">
+      <div class="scene-tag scene-bad">情境三</div>
+      <div class="scene-title">在內陸高地（如 Puig de Randa 等內陸山丘）</div>
+      <div class="scene-body">這類點雖視野遼闊、吸引大量人潮，但因太陽極低，<strong>太陽會先沉入西方的陸地山稜線，在全食真正發生前就「消失」</strong>。換言之，可能看到偏食逐漸加深、環境轉暗，卻在最後一刻失去太陽蹤影，無法見到全食。據在地媒體報導，FIAAM 特別點名此類內陸高地為「視野不保證、但易聚集人潮」的地雷區。</div>
+    </div>
+    <div class="scene-card">
+      <div class="scene-tag scene-bad">情境四</div>
+      <div class="scene-title">在 Sant Elm（西端，面向 Dragonera 島）</div>
+      <div class="scene-body">據在地媒體報導，FIAAM 明確指出，Sant Elm 正前方的 <strong>Sa Dragonera 島（龍島）會在關鍵時刻遮住太陽</strong>，無法看到完整全食。看起來面海開闊，實際上是隱藏地雷，務必避開。</div>
+    </div>
+    <div class="scene-card">
+      <div class="scene-tag scene-bad">情境五</div>
+      <div class="scene-title">完全在全食帶之外（如巴塞隆納等本島東北）</div>
+      <div class="scene-body">會看到接近滿食的<strong>偏食（99%）</strong>，但這與全食有本質差異——天空不會真正變黑、看不到日冕、感受不到突如其來的黑暗與氣溫驟降。天文圈的共識是：偏食 99% 與全食是兩種完全不同的體驗，「差一點」等於「沒看到」。</div>
+    </div>
+    <div class="scene-card">
+      <div class="scene-tag scene-good">加碼彩蛋</div>
+      <div class="scene-title">全食當晚的英仙座流星雨</div>
+      <div class="scene-body">8月12日恰逢英仙座流星雨（Perseidas）極大期前後。若你所在地光害低，日食結束、入夜後還有機會看到流星，是這趟觀測的額外驚喜。</div>
+    </div>
+  </div>
+
+
+  <div id="sec-map"></div>
   <!-- 地圖 -->
   <p class="section-title" style="margin-top:36px;">觀測點位置地圖</p>
   <p style="font-size:12px;color:var(--slate);margin-bottom:10px;">共六個觀測點，分為兩組。點擊按鈕切換聚焦地圖。</p>
@@ -468,6 +756,7 @@
   </div>
   <p style="font-size:11px;color:#999;margin-top:8px;">提示：點擊上方按鈕可切換聚焦各觀測點。點地圖內「在較大的地圖中查看」可開啟完整 Google Maps。</p>
 
+  <div id="sec-table"></div>
   <!-- 綜合比較表 -->
   <p class="section-title">六大觀測地點綜合比較</p>
   <table class="data-table">
@@ -528,6 +817,7 @@
     </tbody>
   </table>
 
+  <div id="sec-cards"></div>
   <!-- 詳細評述 -->
   <p class="section-title">各觀測地點詳細評述</p>
 
@@ -693,44 +983,152 @@
 
   </div>
 
-  <!-- 非最佳點預期景象 -->
-  <p class="section-title">若未在景觀良好的觀測點，島上會看到什麼？</p>
+  <div id="sec-traffic"></div>
+  <!-- 8/12 交通管制分析 -->
+  <p class="section-title">8月12日交通管制風險分析</p>
   <div class="intro-block" style="padding-top:0;">
-    <p>由於這次日食的太陽仰角極低（食甚僅約 2.6°），「站在哪裡」幾乎決定了「看到什麼」。以下依不同情境說明預期景象，協助你評估退而求其次的選擇：</p>
+    <p>這是目前本次觀測最大的未確定因素。以下整理截至 2026年6月的最新政府動態，讓你提前做好應對準備。</p>
   </div>
-  <div class="scene-grid">
-    <div class="scene-card">
-      <div class="scene-tag scene-good">情境一</div>
-      <div class="scene-title">在全食帶內、但西方略有遮蔽（如多數海灘、低地）</div>
-      <div class="scene-body">天色會在 20:31 前後急遽轉暗、氣溫驟降，能感受到全食的「白晝變黃昏」氛圍與環境劇變。但若前方有建築、樹木或矮丘，<strong>可能恰好擋住貼海平面的黑太陽本體</strong>，看不到最關鍵的「日冕光環」與「鑽石環」。也就是說，氛圍有了，但最精華的畫面可能落空。</div>
+  <div class="traffic-grid">
+
+    <div class="traffic-card traffic-high">
+      <div class="traffic-header">
+        <span class="traffic-badge badge-high">高風險</span>
+        <span class="traffic-road">Ma-10 山區公路（Tramuntana 主幹道）</span>
+      </div>
+      <div class="traffic-body">
+        <p>連接 A1（Torre des Verger）與 A3（Sa Foradada）的主要道路。<strong>地方政府正積極討論當日封閉給非當地居民</strong>，若你未住在 Deià、Valldemossa、Banyalbufar 等山區村莊，屆時可能無法駕車進入。</p>
+        <p style="margin-top:8px;">據 Majorca Daily Bulletin（2026年6月16日）報導，<strong>巴利阿里群島總統 Marga Prohens 已確認將實施管制</strong>，但排除了最嚴格的 24 小時全面封路方案；確切措施仍在技術評估中，預計日食前公告。</p>
+        <div class="traffic-tip">📌 應對建議：若選 A1 或 A3，強烈建議直接入住 Ma-10 沿線村莊（步行可達觀測點），完全迴避管制風險。</div>
+      </div>
     </div>
-    <div class="scene-card">
-      <div class="scene-tag scene-ok">情境二</div>
-      <div class="scene-title">在 Palma 市區 / 帕爾馬灣</div>
-      <div class="scene-body">據在地媒體報導，FIAAM 判定 Palma 市區並非 100% 觀測點，<strong>市區約可見 85% 的食分</strong>。西北方的 Bellver 山丘會擋住低空太陽，多數市區地點看不到完整全食。可感受到天色明顯變暗，但天空不會全黑、看不到日冕。市區較開闊的海濱步道（Paseo Marítimo）西段條件稍好。</div>
+
+    <div class="traffic-card traffic-med">
+      <div class="traffic-header">
+        <span class="traffic-badge badge-med">中風險</span>
+        <span class="traffic-road">Sóller 聯外道路（通往 B2 Cap Gros）</span>
+      </div>
+      <div class="traffic-body">
+        <p>Sóller 與 Port de Sóller 的聯外道路被在地媒體點名為日食當日<strong>高壅塞路段之一</strong>，但目前無封路方案。</p>
+        <p style="margin-top:8px;">B2（Far des Cap Gros）本身停車位極少，建議從 Port de Sóller 鎮步行上來，繞開停車問題。</p>
+        <div class="traffic-tip">📌 應對建議：最晚 15:00 前到達 Port de Sóller，找好停車位後步行前往。</div>
+      </div>
     </div>
-    <div class="scene-card">
-      <div class="scene-tag scene-bad">情境三</div>
-      <div class="scene-title">在內陸高地（如 Puig de Randa 等內陸山丘）</div>
-      <div class="scene-body">這類點雖視野遼闊、吸引大量人潮，但因太陽極低，<strong>太陽會先沉入西方的陸地山稜線，在全食真正發生前就「消失」</strong>。換言之，可能看到偏食逐漸加深、環境轉暗，卻在最後一刻失去太陽蹤影，無法見到全食。據在地媒體報導，FIAAM 特別點名此類內陸高地為「視野不保證、但易聚集人潮」的地雷區。</div>
+
+    <div class="traffic-card traffic-med">
+      <div class="traffic-header">
+        <span class="traffic-badge badge-med">中風險</span>
+        <span class="traffic-road">Cap Salines 聯外道路（通往 B3）</span>
+      </div>
+      <div class="traffic-body">
+        <p>Cap Salines（B3）聯外道路為島嶼最南端的單線道路，當日可能因人潮壅塞，但無封路計畫。</p>
+        <p style="margin-top:8px;">相較 Tramuntana 山區，此路段路況好且寬度足夠，壅塞可能性較低但仍不可大意。</p>
+        <div class="traffic-tip">📌 應對建議：16:00 前抵達，現場無遮蔭，備足水與防曬。</div>
+      </div>
     </div>
-    <div class="scene-card">
-      <div class="scene-tag scene-bad">情境四</div>
-      <div class="scene-title">在 Sant Elm（西端，面向 Dragonera 島）</div>
-      <div class="scene-body">據在地媒體報導，FIAAM 明確指出，Sant Elm 正前方的 <strong>Sa Dragonera 島（龍島）會在關鍵時刻遮住太陽</strong>，無法看到完整全食。看起來面海開闊，實際上是隱藏地雷，務必避開。</div>
+
+    <div class="traffic-card traffic-low">
+      <div class="traffic-header">
+        <span class="traffic-badge badge-low">低風險</span>
+        <span class="traffic-road">西南岸道路（A2 Malgrats、B1 Cap Blanc）</span>
+      </div>
+      <div class="traffic-body">
+        <p>A2（Mirador de les Malgrats）與 B1（Cap Blanc）位於西南岸，路況平整、道路寬敞，完全不在封路討論範圍內，<strong>是六個地點中交通風險最低的選擇</strong>。</p>
+        <p style="margin-top:8px;">B1 Cap Blanc 路旁有多個停車空間，但須注意車內竊案（請勿留貴重物品）。</p>
+        <div class="traffic-tip">📌 應對建議：這兩個地點若 Ma-10 當日封路，可作為臨時備案的首選替換點。</div>
+      </div>
     </div>
-    <div class="scene-card">
-      <div class="scene-tag scene-bad">情境五</div>
-      <div class="scene-title">完全在全食帶之外（如巴塞隆納等本島東北）</div>
-      <div class="scene-body">會看到接近滿食的<strong>偏食（99%）</strong>，但這與全食有本質差異——天空不會真正變黑、看不到日冕、感受不到突如其來的黑暗與氣溫驟降。天文圈的共識是：偏食 99% 與全食是兩種完全不同的體驗，「差一點」等於「沒看到」。</div>
+
+  </div>
+  <div class="traffic-note">
+    ⚠ <strong>管制細節仍未最終確認（截至 2026年6月）</strong>。建議出發前一週查閱巴利阿里群島政府官網（<a href="https://www.caib.es" target="_blank" rel="noopener" style="color:var(--gold);">caib.es</a>）與 DGT（西班牙交通局）的最新公告。
+  </div>
+
+  <div id="sec-photo"></div>
+  <!-- 手機攝影攻略 -->
+  <p class="section-title">用手機拍攝日全食 — 實戰攻略</p>
+  <div class="intro-block" style="padding-top:0;">
+    <p>日全食只有約 96 秒的全食窗口，且太陽仰角僅 2.6°，是攝影難度極高的場景。以下分階段說明手機拍攝要領，讓你在不錯過親眼感受的前提下留下影像。</p>
+  </div>
+
+  <div class="photo-warning">
+    ⚠ <strong>第一原則：全食前後所有偏食階段，手機鏡頭前必須加裝太陽濾鏡。</strong>直接對準太陽拍攝不僅可能損壞感光元件，偏食階段的太陽亮度仍足以造成嚴重傷害。最簡單的解法：把 ISO 12312-2 日食眼鏡的其中一片鏡片，用膠帶固定在手機鏡頭前即可。
+  </div>
+
+  <div class="photo-phases">
+
+    <div class="photo-phase">
+      <div class="photo-phase-header">
+        <span class="phase-time">19:38:11 — 20:31:05</span>
+        <span class="phase-name">偏食階段（C1 → C2）</span>
+        <span class="phase-filter filter-on">🔴 濾鏡必須開啟</span>
+      </div>
+      <div class="photo-phase-body">
+        <ul class="photo-tips">
+          <li><strong>加裝太陽濾鏡</strong>後，鏡頭才能安全對準太陽。用膠帶固定日食眼鏡鏡片於鏡頭前。</li>
+          <li><strong>固定手機曝光</strong>：iPhone 長按對焦框旁的太陽圖示向下拖曳降低 EV；Android 開啟 Pro 模式手動調低曝光。避免自動曝光讓畫面反覆跳動。</li>
+          <li><strong>架設腳架</strong>：偏食長達約 53 分鐘，腳架固定後可定時拍攝月球遮蔽太陽的過程，省力且穩定。</li>
+          <li><strong>拍攝重點</strong>：記錄月球逐漸「咬掉」太陽的弓形變化，可設定每 5 分鐘拍一張，後製成縮時效果。</li>
+          <li><strong>環境鏡頭</strong>：偏食後期（約 20:15 後）天色開始異常，此時用廣角拍攝海平線、人群與天色變化，這類「氣氛照」往往比特寫更動人。</li>
+        </ul>
+      </div>
     </div>
-    <div class="scene-card">
-      <div class="scene-tag scene-good">加碼彩蛋</div>
-      <div class="scene-title">全食當晚的英仙座流星雨</div>
-      <div class="scene-body">8月12日恰逢英仙座流星雨（Perseidas）極大期前後。若你所在地光害低，日食結束、入夜後還有機會看到流星，是這趟觀測的額外驚喜。</div>
+
+    <div class="photo-phase phase-totality">
+      <div class="photo-phase-header">
+        <span class="phase-time">20:31:05 — 20:32:42</span>
+        <span class="phase-name">全食階段（C2 → C3）1 分 38 秒</span>
+        <span class="phase-filter filter-off">🟢 移除濾鏡</span>
+      </div>
+      <div class="photo-phase-body">
+        <ul class="photo-tips">
+          <li><strong>C2 前 30 秒立即移除濾鏡</strong>：Baily's Beads（貝里珠）與鑽石環在 C2 發生的瞬間，這是全食最精華的畫面，沒有事先移除濾鏡將完全錯過。</li>
+          <li><strong>開啟連拍模式（Burst）</strong>：鑽石環轉瞬即逝，iPhone 長按快門、Android 長壓或設定連拍，確保抓到那一刻。</li>
+          <li><strong>曝光設定</strong>：日冕亮度約等同滿月，手機自動模式通常可用，但建議手動降低 EV 1-2 格避免過曝。</li>
+          <li><strong>別只顧拍攝</strong>：96 秒極短。天文攝影師的共識是：第一次看日全食，先用眼睛看 60 秒，最後 30 秒再拍。拍出來模糊的照片，遠不及親眼所見的震撼。</li>
+          <li><strong>廣角拍攝日冕全景</strong>：手機廣角鏡頭能拍下太陽周圍更大範圍的日冕延伸，以及地平線的橙紅晨昏光帶，效果往往優於望遠端特寫。</li>
+          <li><strong>錄影備援</strong>：C2 前開始錄影，讓整個全食過程留存影片；靜態照片和影片同時進行，互為保險。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="photo-phase">
+      <div class="photo-phase-header">
+        <span class="phase-time">20:32:42 — 20:51 日落</span>
+        <span class="phase-name">全食後偏食（C3 → 帶食日落）</span>
+        <span class="phase-filter filter-on">🔴 重新加裝濾鏡</span>
+      </div>
+      <div class="photo-phase-body">
+        <ul class="photo-tips">
+          <li><strong>C3 後立即重新加裝太陽濾鏡</strong>：日冕消失即代表太陽邊緣開始露出，此時直視或拍攝都需要重新加上濾鏡。</li>
+          <li>偏食太陽逐漸沒入海平線（約 20:49），是本次日食特有的「帶食日落」奇景——<strong>建議此時轉為廣角構圖</strong>，把帶缺口的太陽、海平線、地中海海面與前景一同入鏡，這是此次日食的限定構圖。</li>
+          <li>日落後的極短窗口內，天色極深，有機會在西方地平線拍到行星（金星）出現。</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="photo-advice-grid">
+    <div class="photo-advice-card">
+      <div class="photo-advice-title">📱 iPhone 用戶</div>
+      <p>相機 app 長按對焦框 → 拖曳太陽圖示調整曝光。全食中可切換「攝影模式」錄影。ProRAW 格式（若支援）保留更多細節供後製。</p>
+    </div>
+    <div class="photo-advice-card">
+      <div class="photo-advice-title">📱 Android 用戶</div>
+      <p>開啟 Pro／專業模式，手動設定 ISO 50–100、快門 1/500 以上（偏食）。全食中切回自動或降低快門至 1/100–1/30 補光。</p>
+    </div>
+    <div class="photo-advice-card">
+      <div class="photo-advice-title">🔭 想要更好畫質</div>
+      <p>手機夾接目鏡（望遠鏡或雙筒鏡）可大幅提升日面細節。記得偏食全程望遠鏡同樣需要太陽濾鏡，全食期間才能移除。</p>
+    </div>
+    <div class="photo-advice-card">
+      <div class="photo-advice-title">⚡ 最重要的一件事</div>
+      <p>事前在相同光線條件下練習：8月11日傍晚（日落前）帶著手機到預定地點，練習低角度拍攝海平面的太陽，確認設定與構圖。</p>
     </div>
   </div>
 
+  <div id="sec-notice"></div>
   <!-- 重要注意事項 -->
   <div class="notice-box">
     <h4>重要注意事項 — 觀測前必讀</h4>
@@ -743,6 +1141,7 @@
     </ul>
   </div>
 
+  <div id="sec-sources"></div>
   <!-- 資料來源與延伸連結 -->
   <p class="section-title">資料來源與延伸連結</p>
   <p style="font-size:13px;color:var(--slate);margin-bottom:14px;">FIAAM（馬略卡天文基金會）的視野地圖與觀測建議，係透過記者會與新聞稿對外發布，其官網（<a href="https://www.fiaamallorca.com" target="_blank" rel="noopener" style="color:var(--gold);">fiaamallorca.com</a>）並無 2026 日食專頁。以下為實際刊載相關資料的在地媒體報導，以及可逐點查詢的第三方互動工具：</p>
@@ -770,6 +1169,14 @@
     <div class="src-item">
       <span class="src-cat">互動工具 · 逐點視線模擬</span>
       <a href="http://xjubier.free.fr/en/site_pages/solar_eclipses/TSE_2026_GoogleMapFull.html" target="_blank" rel="noopener">Xavier Jubier 互動 Google 地圖（含逐點時刻與地平線視線）</a>
+    </div>
+    <div class="src-item">
+      <span class="src-cat">天文數據 · 精確接觸時間（C1/C2/最大食/C3）</span>
+      <a href="https://theskylive.com/solar-eclipse?id=2026-08-12&geoid=2512989" target="_blank" rel="noopener">TheSkyLive — 2026年8月12日日全食 Palma 精確時刻（Xavier Jubier KML 路徑）</a>
+    </div>
+    <div class="src-item">
+      <span class="src-cat">天文數據 · 交通管制官方新聞</span>
+      <a href="https://www.majorcadailybulletin.com/news/local/2026/06/16/143293/balearics-introduce-traffic-restrictions-for-august-solar-eclipse.html" target="_blank" rel="noopener">Majorca Daily Bulletin：巴利阿里群島將實施日食交通管制（2026/06/16）</a>
     </div>
     <div class="src-item">
       <span class="src-cat">機構官網 · 活動報名</span>
@@ -805,6 +1212,45 @@
     document.querySelectorAll('.map-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
   }
+</script>
+<script>
+  // Floating nav
+  function toggleNav() {
+    const panel = document.getElementById('fnavPanel');
+    const toggle = document.getElementById('fnavToggle');
+    const isOpen = panel.classList.toggle('open');
+    toggle.style.display = isOpen ? 'none' : 'flex';
+  }
+
+  function navTo(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const offset = 24;
+    const top = el.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+
+  // Highlight active section on scroll
+  const navSections = [
+    'sec-astro','sec-timeline','sec-scene','sec-map',
+    'sec-table','sec-cards','sec-traffic','sec-photo',
+    'sec-notice','sec-sources'
+  ];
+
+  function updateActiveNav() {
+    const scrollY = window.scrollY + 80;
+    let current = navSections[0];
+    for (const id of navSections) {
+      const el = document.getElementById(id);
+      if (el && el.offsetTop <= scrollY) current = id;
+    }
+    document.querySelectorAll('.fnav-item').forEach((btn, i) => {
+      btn.classList.toggle('active', navSections[i] === current);
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveNav, { passive: true });
+  updateActiveNav();
 </script>
 </body>
 </html>
